@@ -19,13 +19,11 @@ export type RelCnf = string | string[];
 export type Policy = {
   subj: string;
   rels?: { [relName: string]: RelCnf };
-  acts?: { [actName: string]: string | string[] };
 };
 
 export type CompliedPolicy = {
   subj: string;
   rels: { [relName: string]: ValidType };
-  acts: { [actName: string]: ValidType };
 }
 
 export enum Notation {

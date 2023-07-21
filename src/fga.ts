@@ -11,16 +11,10 @@ export class FGA {
   public rawPolicies: Policy[] = [];
 
   load(policies: Policy[]) {
-    this.rawPolicies = policies.map(policy => {
-      return {
-        ...policy,
-        acts: policy.rels
-      }
-    });
+    this.rawPolicies = policies;
 
     policies.forEach(policy => {
       this.compiledPolicies.set(policy.subj, {
-        acts: this.detectType(policy, policy.acts),
         rels: this.detectType(policy, policy.rels),
         subj: policy.subj,
       });
@@ -39,7 +33,7 @@ export class FGA {
       throw new Error(`There is no policy for "${object.name}"`);
     }
 
-    const relCnf = subjPolicy.acts[relation];
+    const relCnf = subjPolicy.rels[relation];
     if (!relCnf) {
       throw new Error(`There is no action named "${relation}" inside subject "${object.name}"`);
     }
